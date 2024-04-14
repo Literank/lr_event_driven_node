@@ -14,14 +14,20 @@ class RestHandler {
 
   public async indexPage(req: Request, res: Response): Promise<void> {
     let books: Book[];
+    const q = req.query.q as string;
     try {
-      books = await this.bookOperator.getBooks(0, "");
+      books = await this.bookOperator.getBooks(0, q);
     } catch (err) {
       console.warn(`Failed to get books: ${err}`);
       books = [];
     }
     // Render the 'index.handlebars' template, passing data to it
-    res.render("index", { layout: false, title: "LiteRank Book Store", books });
+    res.render("index", {
+      layout: false,
+      title: "LiteRank Book Store",
+      books,
+      q,
+    });
   }
 
   // Get all books
