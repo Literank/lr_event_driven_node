@@ -1,0 +1,10 @@
+{
+  "app": {
+    "port": 3000,
+    "page_size": 5,
+    "templates_dir": "src/adapter/templates"
+  },
+  "db": {
+    "dsn": "mysql://test_user:test_pass@127.0.0.1:3306/lr_event_book?charset=utf8mb4"
+  }
+}

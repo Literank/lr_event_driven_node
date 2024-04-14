@@ -1,0 +1,1 @@
+export { InitApp } from "./router";

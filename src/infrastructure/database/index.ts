@@ -1,0 +1,1 @@
+export { MySQLPersistence } from "./mysql";

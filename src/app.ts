@@ -1,22 +1,13 @@
-import express from "express";
-import { engine } from "express-handlebars";
+import { WireHelper } from "./application";
+import { InitApp } from "./adapter/router";
+import { parseConfig } from "./infrastructure/config";
 
-const app = express();
-const port = 3000;
+const config_filename = "config.json";
 
-// Set Handlebars as the template engine
-app.engine("handlebars", engine());
-app.set("view engine", "handlebars");
-// Set the directory for template files
-app.set("views", "./templates");
+const c = parseConfig(config_filename);
+const wireHelper = new WireHelper(c);
+const app = InitApp(c.app.templates_dir, wireHelper);
 
-// Define a route to render the template
-app.get("/", (req, res) => {
-  // Render the 'index.handlebars' template, passing data to it
-  res.render("index", { layout: false, title: "LiteRank Book Store" });
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(c.app.port, () => {
+  console.log(`Running on port ${c.app.port}`);
 });
