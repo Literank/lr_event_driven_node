@@ -12,6 +12,18 @@ class RestHandler {
     this.bookOperator = bookOperator;
   }
 
+  public async indexPage(req: Request, res: Response): Promise<void> {
+    let books: Book[];
+    try {
+      books = await this.bookOperator.getBooks(0, "");
+    } catch (err) {
+      console.warn(`Failed to get books: ${err}`);
+      books = [];
+    }
+    // Render the 'index.handlebars' template, passing data to it
+    res.render("index", { layout: false, title: "LiteRank Book Store", books });
+  }
+
   // Get all books
   public async getBooks(req: Request, res: Response): Promise<void> {
     let offset = parseInt(req.query.o as string);
@@ -49,10 +61,7 @@ function MakeRouter(wireHelper: WireHelper): express.Router {
   );
 
   const router = express.Router();
-  router.get("/", (req, res) => {
-    // Render the 'index.handlebars' template, passing data to it
-    res.render("index", { layout: false, title: "LiteRank Book Store" });
-  });
+  router.get("/", restHandler.indexPage.bind(restHandler));
   router.get("/api/books", restHandler.getBooks.bind(restHandler));
   router.post("/api/books", restHandler.createBook.bind(restHandler));
   return router;
