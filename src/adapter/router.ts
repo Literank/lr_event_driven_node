@@ -12,6 +12,24 @@ class RestHandler {
     this.bookOperator = bookOperator;
   }
 
+  // Get all books
+  public async getBooks(req: Request, res: Response): Promise<void> {
+    let offset = parseInt(req.query.o as string);
+    if (isNaN(offset)) {
+      offset = 0;
+    }
+    try {
+      const books = await this.bookOperator.getBooks(
+        offset,
+        req.query.q as string
+      );
+      res.status(200).json(books);
+    } catch (err) {
+      console.error(`Failed to get books: ${err}`);
+      res.status(404).json({ error: "Failed to get books" });
+    }
+  }
+
   // Create a new book
   public async createBook(req: Request, res: Response): Promise<void> {
     try {
@@ -35,6 +53,7 @@ function MakeRouter(wireHelper: WireHelper): express.Router {
     // Render the 'index.handlebars' template, passing data to it
     res.render("index", { layout: false, title: "LiteRank Book Store" });
   });
+  router.get("/api/books", restHandler.getBooks.bind(restHandler));
   router.post("/api/books", restHandler.createBook.bind(restHandler));
   return router;
 }

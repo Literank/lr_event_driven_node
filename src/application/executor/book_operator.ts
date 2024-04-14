@@ -13,4 +13,8 @@ export class BookOperator {
     b.id = id;
     return b;
   }
+
+  async getBooks(offset: number, query: string): Promise<Book[]> {
+    return await this.bookManager.getBooks(offset, query);
+  }
 }
