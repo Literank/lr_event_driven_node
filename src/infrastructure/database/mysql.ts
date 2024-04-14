@@ -26,8 +26,6 @@ export class MySQLPersistence implements BookManager {
       (err) => {
         if (err) {
           console.error("Error in MySQL:", err.message);
-        } else {
-          console.log("Successfully initialized tables.");
         }
       }
     );

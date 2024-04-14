@@ -6,5 +6,9 @@
   },
   "db": {
     "dsn": "mysql://test_user:test_pass@127.0.0.1:3306/lr_event_book?charset=utf8mb4"
+  },
+  "mq": {
+    "brokers": ["localhost:9094"],
+    "topic": "lr-book-searches"
   }
 }

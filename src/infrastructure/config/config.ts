@@ -10,9 +10,15 @@ interface ApplicationConfig {
   templates_dir: string;
 }
 
+interface MQConfig {
+  brokers: string[];
+  topic: string;
+}
+
 export interface Config {
   app: ApplicationConfig;
   db: DBConfig;
+  mq: MQConfig;
 }
 
 export function parseConfig(filename: string): Config {

@@ -25,6 +25,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
+    "kafkajs": "^2.2.4",
     "mysql2": "^3.9.4"
   },
   "devDependencies": {

@@ -63,7 +63,7 @@ class RestHandler {
 // Create router
 function MakeRouter(wireHelper: WireHelper): express.Router {
   const restHandler = new RestHandler(
-    new BookOperator(wireHelper.bookManager())
+    new BookOperator(wireHelper.bookManager(), wireHelper.messageQueueHelper())
   );
 
   const router = express.Router();
