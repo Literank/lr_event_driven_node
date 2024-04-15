@@ -4,7 +4,7 @@
   "description": "Example project: building event driven microservices in Node.js.",
   "main": "app.js",
   "scripts": {
-    "dev": "ts-node src/app.ts",
+    "dev-web": "ts-node src/web/app.ts",
     "build": "tsc"
   },
   "repository": {

@@ -1,6 +1,6 @@
 import mysql, { ResultSetHeader } from "mysql2";
 
-import { Book } from "../../domain/model";
+import { Book } from "../../../domain/model";
 import { BookManager } from "../../domain/gateway";
 
 export class MySQLPersistence implements BookManager {

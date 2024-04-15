@@ -2,7 +2,7 @@ import { WireHelper } from "./application";
 import { InitApp } from "./adapter/router";
 import { parseConfig } from "./infrastructure/config";
 
-const config_filename = "config.json";
+const config_filename = "src/web/config.json";
 
 const c = parseConfig(config_filename);
 const wireHelper = new WireHelper(c);

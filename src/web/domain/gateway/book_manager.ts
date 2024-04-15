@@ -1,4 +1,4 @@
-import { Book } from "../model";
+import { Book } from "../../../domain/model";
 
 export interface BookManager {
   createBook(b: Book): Promise<number>;

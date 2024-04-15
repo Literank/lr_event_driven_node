@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { engine } from "express-handlebars";
 
-import { Book } from "../domain/model";
+import { Book } from "../../domain/model";
 import { BookOperator } from "../application/executor";
 import { WireHelper } from "../application";
 

@@ -1,5 +1,5 @@
 import { BookManager } from "../../domain/gateway";
-import { Book } from "../../domain/model";
+import { Book } from "../../../domain/model";
 import { MQHelper } from "../../infrastructure/mq";
 
 export class BookOperator {
