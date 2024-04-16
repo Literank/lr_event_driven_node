@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev-web": "ts-node src/web/app.ts",
-    "dev-trend": "ts-node src/trend/app.ts",
+    "dev-trend": "tsc && node dist/trend/app.js",
     "build": "tsc"
   },
   "repository": {

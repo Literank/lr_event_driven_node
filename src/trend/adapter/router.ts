@@ -11,9 +11,9 @@ class RestHandler {
   }
 
   public async getTrends(req: Request, res: Response): Promise<void> {
-    let offset = parseInt(req.query.o as string) || 0;
+    let pageSize = parseInt(req.query.ps as string) || 0;
     try {
-      const books = await this.trendOperator.topTrends(offset);
+      const books = await this.trendOperator.topTrends(pageSize);
       res.status(200).json(books);
     } catch (err) {
       console.error(`Failed to get trends: ${err}`);

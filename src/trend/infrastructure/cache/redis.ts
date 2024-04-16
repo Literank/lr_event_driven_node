@@ -19,7 +19,6 @@ export class RedisCache implements TrendManager {
       commandTimeout: c.timeout,
     };
     this.client = new Redis(options);
-    console.log("Connected to Redis");
   }
 
   async createTrend(t: Trend): Promise<number> {
@@ -32,17 +31,17 @@ export class RedisCache implements TrendManager {
     return Number(score);
   }
 
-  async topTrends(offset: number): Promise<Trend[]> {
+  async topTrends(pageSize: number): Promise<Trend[]> {
     const topItems = await this.client.zrevrange(
       trendsKey,
       0,
-      offset,
+      pageSize - 1,
       "WITHSCORES"
     );
     const trends: Trend[] = [];
     for (let i = 0; i < topItems.length; i += 2) {
       const query = topItems[i];
-      const t = { query: query, books: [], created_at: null };
+      const t = { query: query, books: [] };
       const k = queryKeyPrefix + query;
       const value = await this.client.get(k);
       if (value !== null) {

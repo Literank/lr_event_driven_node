@@ -1,1 +1,5 @@
-export { TrendManager } from "./trend_manager";
+export {
+  TrendManager,
+  TrendEventConsumer,
+  ConsumeCallback,
+} from "./trend_manager";

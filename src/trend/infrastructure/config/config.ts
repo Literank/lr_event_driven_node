@@ -12,9 +12,15 @@ export interface CacheConfig {
   timeout: number; // in milliseconds
 }
 
+interface MQConfig {
+  brokers: string[];
+  topic: string;
+}
+
 export interface Config {
   app: ApplicationConfig;
   cache: CacheConfig;
+  mq: MQConfig;
 }
 
 export function parseConfig(filename: string): Config {

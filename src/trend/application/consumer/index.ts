@@ -1,0 +1,1 @@
+export { TrendConsumer } from "./trend";
