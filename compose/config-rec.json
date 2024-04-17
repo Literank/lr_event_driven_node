@@ -1,0 +1,15 @@
+{
+  "app": {
+    "port": 3002,
+    "pageSize": 10
+  },
+  "db": {
+    "uri": "mongodb://mongo:27017",
+    "dbName": "lr_event_rec"
+  },
+  "mq": {
+    "brokers": ["kafka:9092"],
+    "topic": "lr-book-searches",
+    "groupId": "rec-svr"
+  }
+}
