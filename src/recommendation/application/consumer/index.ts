@@ -1,0 +1,1 @@
+export { InterestConsumer } from "./interest";

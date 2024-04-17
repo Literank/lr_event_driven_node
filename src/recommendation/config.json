@@ -1,0 +1,15 @@
+{
+  "app": {
+    "port": 3002,
+    "pageSize": 10
+  },
+  "db": {
+    "uri": "mongodb://localhost:27017",
+    "dbName": "lr_event_rec"
+  },
+  "mq": {
+    "brokers": ["localhost:9094"],
+    "topic": "lr-book-searches",
+    "groupId": "rec-svr"
+  }
+}
