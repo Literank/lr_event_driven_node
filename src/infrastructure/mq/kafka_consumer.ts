@@ -2,15 +2,13 @@ import { Kafka, Consumer, EachMessagePayload } from "kafkajs";
 
 import { ConsumeCallback, TrendEventConsumer } from "../../domain/gateway";
 
-const GROUP_ID = "trend-svr";
-
 export class KafkaConsumer implements TrendEventConsumer {
   private consumer: Consumer;
   private topic: string;
 
-  constructor(brokers: string[], topic: string) {
+  constructor(brokers: string[], topic: string, groupId: string) {
     const kafka = new Kafka({ brokers });
-    this.consumer = kafka.consumer({ groupId: GROUP_ID });
+    this.consumer = kafka.consumer({ groupId });
     this.topic = topic;
   }
 

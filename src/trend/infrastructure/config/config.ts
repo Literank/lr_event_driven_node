@@ -15,6 +15,7 @@ export interface CacheConfig {
 interface MQConfig {
   brokers: string[];
   topic: string;
+  groupId: string;
 }
 
 export interface Config {

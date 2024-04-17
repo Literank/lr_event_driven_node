@@ -1,5 +1,6 @@
 import { Trend } from "../../../domain/model";
-import { TrendManager, TrendEventConsumer } from "../../domain/gateway";
+import { TrendManager } from "../../domain/gateway";
+import { TrendEventConsumer } from "../../../domain/gateway";
 
 export class TrendConsumer {
   private trendManager: TrendManager;

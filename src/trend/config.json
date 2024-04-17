@@ -11,6 +11,7 @@
   },
   "mq": {
     "brokers": ["localhost:9094"],
-    "topic": "lr-book-searches"
+    "topic": "lr-book-searches",
+    "groupId": "trend-svr"
   }
 }

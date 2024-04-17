@@ -1,7 +1,8 @@
 import { Config } from "../infrastructure/config";
-import { TrendManager, TrendEventConsumer } from "../domain/gateway";
+import { TrendManager } from "../domain/gateway";
+import { TrendEventConsumer } from "../../domain/gateway";
 import { RedisCache } from "../infrastructure/cache";
-import { KafkaConsumer } from "../infrastructure/mq";
+import { KafkaConsumer } from "../../infrastructure/mq";
 
 // WireHelper is the helper for dependency injection
 export class WireHelper {
@@ -10,7 +11,7 @@ export class WireHelper {
 
   constructor(c: Config) {
     this.kv_store = new RedisCache(c.cache);
-    this.consumer = new KafkaConsumer(c.mq.brokers, c.mq.topic);
+    this.consumer = new KafkaConsumer(c.mq.brokers, c.mq.topic, c.mq.groupId);
   }
 
   trendManager(): TrendManager {
