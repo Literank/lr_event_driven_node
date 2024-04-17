@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import { engine } from "express-handlebars";
 
-import { Book, Trend } from "../../domain/model";
+import { Book, Interest, Trend } from "../../domain/model";
 import { BookOperator } from "../application/executor";
 import { WireHelper } from "../application";
 import { RemoteServiceConfig } from "../infrastructure/config";
@@ -39,12 +39,22 @@ class RestHandler {
       console.warn(`Failed to get trends: ${err}`);
       trends = [];
     }
+    let interests: Interest[];
+    try {
+      interests = await this.bookOperator.getInterests(
+        this.remote.rec_url + user_id
+      );
+    } catch (err) {
+      console.warn(`Failed to get interests: ${err}`);
+      interests = [];
+    }
     // Render the 'index.handlebars' template, passing data to it
     res.render("index", {
       layout: false,
       title: "LiteRank Book Store",
       books,
       trends,
+      recommendations: interests,
       q,
     });
   }

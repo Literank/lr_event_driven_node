@@ -12,6 +12,7 @@
     "topic": "lr-book-searches"
   },
   "remote": {
-    "trend_url": "http://localhost:3001/trends"
+    "trend_url": "http://localhost:3001/trends",
+    "rec_url": "http://localhost:3002/recommendations?uid="
   }
 }

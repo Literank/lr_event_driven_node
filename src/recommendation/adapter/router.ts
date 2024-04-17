@@ -29,7 +29,7 @@ function MakeRouter(wireHelper: WireHelper): express.Router {
   );
 
   const router = express.Router();
-  router.get("/interests", restHandler.getInterests.bind(restHandler));
+  router.get("/recommendations", restHandler.getInterests.bind(restHandler));
   return router;
 }
 

@@ -17,6 +17,7 @@ interface MQConfig {
 
 export interface RemoteServiceConfig {
   trend_url: string;
+  rec_url: string;
 }
 
 export interface Config {

@@ -1,5 +1,5 @@
 import { BookManager } from "../../domain/gateway";
-import { Book, Trend } from "../../../domain/model";
+import { Book, Trend, Interest } from "../../../domain/model";
 import { MQHelper } from "../../infrastructure/mq";
 
 export class BookOperator {
@@ -35,5 +35,11 @@ export class BookOperator {
     const resp = await fetch(trendURL);
     const trends: Trend[] = await resp.json();
     return trends;
+  }
+
+  async getInterests(recURL: string): Promise<Interest[]> {
+    const resp = await fetch(recURL);
+    const interests: Interest[] = await resp.json();
+    return interests;
   }
 }
