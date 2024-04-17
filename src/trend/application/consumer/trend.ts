@@ -1,4 +1,4 @@
-import { Trend } from "../../../domain/model";
+import { Book, Trend } from "../../../domain/model";
 import { TrendManager } from "../../domain/gateway";
 import { TrendEventConsumer } from "../../../domain/gateway";
 
@@ -16,7 +16,7 @@ export class TrendConsumer {
       if (key && data) {
         const parts = key.toString("utf-8").split(":");
         const query = parts[0];
-        const books: any = JSON.parse(data.toString("utf-8"));
+        const books: Book[] = JSON.parse(data.toString("utf-8"));
         const trend: Trend = { query, books };
         await this.trendManager.createTrend(trend);
       }
