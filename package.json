@@ -6,7 +6,7 @@
   "scripts": {
     "dev-web": "ts-node src/web/app.ts",
     "dev-trend": "tsc && node dist/trend/app.js",
-    "dev-rec": "ts-node src/recommendation/app.ts",
+    "dev-rec": "tsc && node dist/recommendation/app.js",
     "build": "tsc"
   },
   "repository": {
