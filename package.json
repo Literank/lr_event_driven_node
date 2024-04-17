@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Literank/lr_event_driven_node#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "ioredis": "^5.3.2",
@@ -31,6 +32,7 @@
     "mysql2": "^3.9.4"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.7",
     "ts-node": "^10.9.2",

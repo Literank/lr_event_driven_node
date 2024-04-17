@@ -17,11 +17,16 @@ export class BookOperator {
     return b;
   }
 
-  async getBooks(offset: number, query: string): Promise<Book[]> {
+  async getBooks(
+    offset: number,
+    userId: string,
+    query: string
+  ): Promise<Book[]> {
     const books = await this.bookManager.getBooks(offset, query);
     if (query) {
+      const k = query + ":" + userId;
       const jsonData = JSON.stringify(books);
-      await this.mqHelper.sendEvent(query, Buffer.from(jsonData, "utf8"));
+      await this.mqHelper.sendEvent(k, Buffer.from(jsonData, "utf8"));
     }
     return books;
   }
