@@ -1,15 +1,18 @@
 import express, { Request, Response } from "express";
 import { engine } from "express-handlebars";
 
-import { Book } from "../../domain/model";
+import { Book, Trend } from "../../domain/model";
 import { BookOperator } from "../application/executor";
 import { WireHelper } from "../application";
+import { RemoteServiceConfig } from "../infrastructure/config";
 
 class RestHandler {
   private bookOperator: BookOperator;
+  private remote: RemoteServiceConfig;
 
-  constructor(bookOperator: BookOperator) {
+  constructor(bookOperator: BookOperator, r: RemoteServiceConfig) {
     this.bookOperator = bookOperator;
+    this.remote = r;
   }
 
   public async indexPage(req: Request, res: Response): Promise<void> {
@@ -21,11 +24,19 @@ class RestHandler {
       console.warn(`Failed to get books: ${err}`);
       books = [];
     }
+    let trends: Trend[];
+    try {
+      trends = await this.bookOperator.getTrends(this.remote.trend_url);
+    } catch (err) {
+      console.warn(`Failed to get trends: ${err}`);
+      trends = [];
+    }
     // Render the 'index.handlebars' template, passing data to it
     res.render("index", {
       layout: false,
       title: "LiteRank Book Store",
       books,
+      trends,
       q,
     });
   }
@@ -61,9 +72,13 @@ class RestHandler {
 }
 
 // Create router
-function MakeRouter(wireHelper: WireHelper): express.Router {
+function MakeRouter(
+  remote: RemoteServiceConfig,
+  wireHelper: WireHelper
+): express.Router {
   const restHandler = new RestHandler(
-    new BookOperator(wireHelper.bookManager(), wireHelper.messageQueueHelper())
+    new BookOperator(wireHelper.bookManager(), wireHelper.messageQueueHelper()),
+    remote
   );
 
   const router = express.Router();
@@ -75,6 +90,7 @@ function MakeRouter(wireHelper: WireHelper): express.Router {
 
 export function InitApp(
   templates_dir: string,
+  remote: RemoteServiceConfig,
   wireHelper: WireHelper
 ): express.Express {
   const app = express();
@@ -88,7 +104,7 @@ export function InitApp(
   // Set the directory for template files
   app.set("views", templates_dir);
 
-  const r = MakeRouter(wireHelper);
+  const r = MakeRouter(remote, wireHelper);
   app.use("", r);
   return app;
 }

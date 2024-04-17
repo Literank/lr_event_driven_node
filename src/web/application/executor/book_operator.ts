@@ -1,5 +1,5 @@
 import { BookManager } from "../../domain/gateway";
-import { Book } from "../../../domain/model";
+import { Book, Trend } from "../../../domain/model";
 import { MQHelper } from "../../infrastructure/mq";
 
 export class BookOperator {
@@ -24,5 +24,11 @@ export class BookOperator {
       await this.mqHelper.sendEvent(query, Buffer.from(jsonData, "utf8"));
     }
     return books;
+  }
+
+  async getTrends(trendURL: string): Promise<Trend[]> {
+    const resp = await fetch(trendURL);
+    const trends: Trend[] = await resp.json();
+    return trends;
   }
 }

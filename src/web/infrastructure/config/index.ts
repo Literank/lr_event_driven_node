@@ -1,1 +1,1 @@
-export { Config, parseConfig } from "./config";
+export { Config, RemoteServiceConfig, parseConfig } from "./config";

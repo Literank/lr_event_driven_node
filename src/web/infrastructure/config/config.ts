@@ -15,10 +15,15 @@ interface MQConfig {
   topic: string;
 }
 
+export interface RemoteServiceConfig {
+  trend_url: string;
+}
+
 export interface Config {
   app: ApplicationConfig;
   db: DBConfig;
   mq: MQConfig;
+  remote: RemoteServiceConfig;
 }
 
 export function parseConfig(filename: string): Config {
