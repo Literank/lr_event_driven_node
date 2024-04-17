@@ -14,7 +14,8 @@ export class TrendConsumer {
   start() {
     const processEvent = async (key: Buffer, data: Buffer): Promise<void> => {
       if (key && data) {
-        const query: string = key.toString("utf-8");
+        const parts = key.toString("utf-8").split(":");
+        const query = parts[0];
         const books: any = JSON.parse(data.toString("utf-8"));
         const trend: Trend = { query, books };
         await this.trendManager.createTrend(trend);
